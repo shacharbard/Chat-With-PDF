@@ -30,8 +30,9 @@ with st.sidebar:
     OPENAI_API_KEY = st.text_input("Enter OpenAI API Key:", placeholder="sk-ndcyu3ye2...")
     if OPENAI_API_KEY=="":
         st.sidebar.error("Please enter your OpenAI API Key")
+    else:
+        llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
 #load_dotenv()
-llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
 def main():
         try:
             st.header("Chat with PDF 💬")
