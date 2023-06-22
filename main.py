@@ -34,7 +34,7 @@ if OPENAI_API_KEY=="":
 #def main():
 else:
     try:
-        llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
+        
         st.header("Chat with PDF 💬")
         pdf = st.file_uploader("Upload your PDF", type='pdf')
         
@@ -59,6 +59,7 @@ else:
                 st.write('Embeddings Loaded from the Disk')
             else:
                 st.spinner('your file is being processed...')
+                llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
                 embeddings = OpenAIEmbeddings()
                 VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
                 with open(f"{file_name}.pkl", "wb") as f:
@@ -69,6 +70,7 @@ else:
                 query = st.text_input("**Ask questions about your PDF file:**")
                 if query:
                     docs = VectorStore.similarity_search(query=query, k=3)
+                    llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
                     chain = load_qa_chain(llm=llm, chain_type="stuff")
                     with get_openai_callback() as cb:
                         response = chain.run(input_documents=docs, question=query)
