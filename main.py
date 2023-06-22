@@ -31,10 +31,9 @@ with st.sidebar:
     if OPENAI_API_KEY=="":
         st.sidebar.error("Please enter your OpenAI API Key")
 #load_dotenv()
-
+llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
 def main():
         try:
-            llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
             st.header("Chat with PDF 💬")
             pdf = st.file_uploader("Upload your PDF", type='pdf')
 
