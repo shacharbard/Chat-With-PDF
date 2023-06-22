@@ -33,8 +33,8 @@ with st.sidebar:
 #load_dotenv()
 #def main():
     else:
-        llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
         try:
+            llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
             st.header("Chat with PDF 💬")
             pdf = st.file_uploader("Upload your PDF", type='pdf')
         
